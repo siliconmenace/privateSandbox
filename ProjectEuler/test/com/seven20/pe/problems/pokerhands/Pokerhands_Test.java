@@ -93,7 +93,8 @@ public class Pokerhands_Test
 	}
 	
 	
-	@Test void shouldScoreHands() throws Exception{
+	@Test 
+	public void shouldScoreHands() throws Exception{
 		CardDeck cd = new CardDeck();
 		Hand[] hands = cd.dealHands( 2, 5 );
 		int i = 1;
