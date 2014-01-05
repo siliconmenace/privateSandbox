@@ -28,12 +28,12 @@ public class Card implements Comparable<Card>
 		}
 	}
 
-	private Suit getSuit()
+	public Suit getSuit()
 	{
 		return suit;
 	}
 
-	private int getValue()
+	public int getValue()
 	{
 		return card.value;
 	}
