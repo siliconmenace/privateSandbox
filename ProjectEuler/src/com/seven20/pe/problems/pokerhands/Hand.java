@@ -24,10 +24,9 @@ public class Hand
 		return cards;
 	}
 
-	public char[] getScore()
+	public List<HandValue> getScore()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return ScoreProcessor.scoreHand( this );
 	}
 
 }

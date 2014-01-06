@@ -17,5 +17,9 @@ public class HandValue {
 	public int getValue() {
 		return value;
 	}
+	
+	public String toString(){
+		return rank + " : " + value; 
+	}
 
 }

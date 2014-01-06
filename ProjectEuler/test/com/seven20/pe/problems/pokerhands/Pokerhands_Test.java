@@ -78,6 +78,30 @@ public class Pokerhands_Test
 	{
 		CardDeck cd = new CardDeck();
 		Hand[] hands = cd.dealHands( 2, 5 );
+		printHand( hands );
+
+		assertTrue( hands.length == 2 && ( hands[0].size() == 5 && hands[1].size() == 5 ) );
+		assertEquals( 42, cd.size() );
+	}
+
+	@Test
+	public void shouldScoreHands() throws Exception
+	{
+		CardDeck cd = new CardDeck();
+		Hand[] hands = cd.dealHands( 2, 5 );
+		printHand( hands );
+		int i = 1;
+		for ( Hand h : hands )
+		{
+			System.out.println( "Hand: " + i++ );
+
+			System.out.println( h.getScore() );
+
+		}
+	}
+
+	private void printHand( Hand[] hands )
+	{
 		int i = 1;
 		for ( Hand h : hands )
 		{
@@ -85,25 +109,6 @@ public class Pokerhands_Test
 			for ( Card c : h.getCards() )
 			{
 				System.out.println( c );
-			}
-		}
-		
-		assertTrue(hands.length == 2 && (hands[0].size() == 5 && hands[1].size() == 5) );
-		assertEquals(42, cd.size());
-	}
-	
-	
-	@Test 
-	public void shouldScoreHands() throws Exception{
-		CardDeck cd = new CardDeck();
-		Hand[] hands = cd.dealHands( 2, 5 );
-		int i = 1;
-		for ( Hand h : hands )
-		{
-			System.out.println( "Hand: " + i++ );
-			for ( Card c : h.getCards() )
-			{
-				System.out.println(h.getScore());
 			}
 		}
 	}

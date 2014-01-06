@@ -60,20 +60,24 @@ public class CardDeck
 		return sb.toString();
 	}
 
-	public Hand[] dealHands( int i, int j ) throws Exception
+
+	/**
+	 * @throws Exception
+	 */
+	public Hand[] dealHands( int numberOfHands, int numberOfCards ) throws Exception
 	{
 		Hand[] hands = null;
-		if ( i * j > 52 )
+		if ( numberOfHands * numberOfCards > 52 )
 		{
-			throw new Exception( "Not enough cards. Need " + i * j );
+			throw new Exception( "Not enough cards. Need " + numberOfHands * numberOfCards );
 		}
 		
-		hands = new Hand[i];
+		hands = new Hand[numberOfHands];
 
-		for ( int h = 0; h < i; h++ )
+		for ( int h = 0; h < numberOfHands; h++ )
 		{
 			hands[h] = new Hand();
-			for ( int s = 0; s < j; s++ )
+			for ( int s = 0; s < numberOfCards; s++ )
 			{
 				hands[h].addCard( dealTopCard() );
 			}
