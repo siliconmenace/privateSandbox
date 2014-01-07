@@ -10,54 +10,62 @@ import java.util.Map;
 public class ScoreProcessor
 {
 
+	private static final class HighCard  {
+		public static HandValue score( List<Card> temp )
+		{
+			int value = -1;
+			for ( Card c : temp)
+			{
+				if ( c.getValue() > value )
+				{
+					value = c.getValue();
+				}
+			}
+			return new HandValue(HIGHCARD, value);
+		}
+	}
+
 	private static final HandScore	pair		= new HandScore()
 												{
 													public HandValue score( Hand h )
 													{
 														Map<Integer, Card> cardMap = new HashMap<Integer, Card>();
+														List<Card> temp = new ArrayList<Card>(h.getCards());
+														HandValue hv = null;
 														for ( Card c : h.getCards() )
 														{
 															if ( cardMap.containsKey( c.getValue() ) )
 															{
-																return new HandValue( PAIR, c.getValue() );
+																hv = new HandValue( PAIR, c.getValue() );
+																temp.remove(c);
+																temp.remove(cardMap.get(c.getValue()));
+																hv.setHighCard(HighCard.score(temp));
+																break;
 															}else{
 																cardMap.put( c.getValue(), c );
 															}
 														}
-														return null;
+														
+														return hv;
 													}
 												};
 
-	private static final HandScore	highCard	= new HandScore()
-												{
-													public HandValue score( Hand h )
-													{
-														int value = -1;
-														for ( Card c : h.getCards() )
-														{
-															if ( c.getValue() > value )
-															{
-																value = c.getValue();
-															}
-														}
-														return new HandValue( HIGHCARD, value );
-													}
-												};
+
 	private static List<HandScore>	handScores	= new ArrayList<HandScore>();
 
 	static
 	{
 		handScores.add( pair );
-		handScores.add( highCard );
-
 	}
 
 	public static List<HandValue> scoreHand( Hand h )
 	{
 		List<HandValue> hv = new ArrayList<HandValue>();
+		HandValue temp = null;
 		for ( HandScore hs : handScores )
 		{
-			hv.add( hs.score( h ) );
+			temp = hs.score( h );
+			hv.add( temp != null ? temp : HighCard.score(h.getCards()) );
 		}
 		return hv;
 	}

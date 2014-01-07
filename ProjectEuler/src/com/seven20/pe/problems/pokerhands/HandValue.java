@@ -4,6 +4,7 @@ public class HandValue {
 
 	private HandRank rank;
 	private int value;
+	private PlayingCards highCard;
 
 	public HandValue(HandRank rank, int value) {
 		this.rank = rank;
@@ -19,7 +20,12 @@ public class HandValue {
 	}
 	
 	public String toString(){
-		return rank + " : " + value; 
+		return rank + " : " + value + " : HighCard: " + highCard ; 
+	}
+
+	public void setHighCard(HandValue hv) {
+		this.highCard = PlayingCards.get(hv.getValue());
+		
 	}
 
 }
